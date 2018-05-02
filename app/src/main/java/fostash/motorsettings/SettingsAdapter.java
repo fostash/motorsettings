@@ -23,22 +23,15 @@ public class SettingsAdapter extends ArrayAdapter<SettingsData> {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.settings_adapter, null);
-        final TextView compression = convertView.findViewById(R.id.compression_value);
-        final TextView rebound = convertView.findViewById(R.id.rebound_value);
-        final TextView preload = convertView.findViewById(R.id.preload_value);
-        final TextView pignon = convertView.findViewById(R.id.pignon_value);
-        final TextView crown = convertView.findViewById(R.id.crown_value);
-        final TextView date = convertView.findViewById(R.id.date_value);
         final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
         final SettingsData c = getItem(position);
         if (c != null) {
-            rebound.setText(String.valueOf(c.getRebound()));
-            compression.setText(String.valueOf(c.getCompression()));
-            preload.setText(String.valueOf(c.getPreload()));
-            pignon.setText(String.valueOf(c.getPignon()));
-            crown.setText(String.valueOf(c.getCrown()));
-            System.out.println("date item " + c.getDate());
-            date.setText(sdf.format(c.getDate()));
+            convertView.<TextView>findViewById(R.id.compression_value).setText(c.getCompression());
+            convertView.<TextView>findViewById(R.id.rebound_value).setText(c.getRebound());
+            convertView.<TextView>findViewById(R.id.preload_value).setText(c.getPreload());
+            convertView.<TextView>findViewById(R.id.pignon_value).setText(c.getPignon());
+            convertView.<TextView>findViewById(R.id.crown_value).setText(c.getCrown());
+            convertView.<TextView>findViewById(R.id.date_value).setText(sdf.format(c.getDate()));
         }
         return convertView;
     }

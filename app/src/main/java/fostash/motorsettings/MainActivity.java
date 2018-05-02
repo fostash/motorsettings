@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.add_circuit);
         fab.setOnClickListener(view -> startActivity(new Intent(this, NewCircuitActivity.class)));
 
     }
@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<String> list = new ArrayList<>();
         list.addAll(Arrays.asList(getFilesDir().list()));
+
+        if (list.isEmpty()) {
+            list.add("Add your first circuit");
+        }
         final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
 

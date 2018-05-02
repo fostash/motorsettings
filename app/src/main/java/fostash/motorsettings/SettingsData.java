@@ -7,14 +7,14 @@ public class SettingsData implements Serializable {
 
     public static final long serialVersionUID = 1L;
 
-    private final Long compression;
-    private final Long rebound;
-    private final Long preload;
-    private final Long pignon;
-    private final Long crown;
+    private final String compression;
+    private final String rebound;
+    private final String preload;
+    private final String pignon;
+    private final String crown;
     private final Date date;
 
-    public SettingsData(Long compression, Long rebound, Long preload, Long pignon, Long crown, Date date) {
+    public SettingsData(String compression, String rebound, String preload, String pignon, String crown, Date date) {
         this.compression = compression;
         this.rebound = rebound;
         this.preload = preload;
@@ -23,27 +23,27 @@ public class SettingsData implements Serializable {
         this.date = date;
     }
 
-    public static SettingsData of(Long compression, Long rebound, Long preload, Long pignon, Long crown, Date date) {
+    public static SettingsData of(String compression, String rebound, String preload, String pignon, String crown, Date date) {
         return new SettingsData(compression, rebound, preload, pignon, crown, date);
     }
 
-    public Long getCompression() {
+    public String getCompression() {
         return compression;
     }
 
-    public Long getRebound() {
+    public String getRebound() {
         return rebound;
     }
 
-    public Long getPreload() {
+    public String getPreload() {
         return preload;
     }
 
-    public Long getPignon() {
+    public String getPignon() {
         return pignon;
     }
 
-    public Long getCrown() {
+    public String getCrown() {
         return crown;
     }
 
