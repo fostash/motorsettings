@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<String> list = new ArrayList<>();
         list.addAll(Arrays.asList(getFilesDir().list()));
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
+        final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener((parent, view, position, id) -> {
@@ -76,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
-        Map<String, Integer> mIdMap = new HashMap<String, Integer>();
+        Map<String, Integer> mIdMap = new HashMap<>();
 
-        public StableArrayAdapter(Context context, int textViewResourceId,
+        StableArrayAdapter(Context context, int textViewResourceId,
                                   List<String> objects) {
             super(context, textViewResourceId, objects);
             for (int i = 0; i < objects.size(); ++i) {

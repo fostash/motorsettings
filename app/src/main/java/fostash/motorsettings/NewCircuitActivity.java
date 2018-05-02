@@ -17,7 +17,6 @@ import java.util.List;
 public class NewCircuitActivity extends AppCompatActivity {
 
     private EditText circuitName;
-    private FloatingActionButton save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +24,15 @@ public class NewCircuitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_circuit);
 
         circuitName = findViewById(R.id.circuit_name);
-        save = findViewById(R.id.save_circuit);
+        FloatingActionButton save = findViewById(R.id.save_circuit);
         save.setOnClickListener(view -> {
             try {
                 FileOutputStream fileOutputStream = openFileOutput(circuitName.getText().toString(), MODE_PRIVATE);
                 ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                List<SettingsData> settingsDataList = new ArrayList<SettingsData>();
-                settingsDataList.add(SettingsData.of(1L, 1L, 1L, 1L, 1L));
+                List<SettingsData> settingsDataList = new ArrayList<>();
                 oos.writeObject(settingsDataList);
+                oos.flush();
+                oos.close();
                 fileOutputStream.close();
                 Intent intent = new Intent(getBaseContext(), EditCircuitActivity.class);
                 intent.putExtra("circuit_name", circuitName.getText().toString());

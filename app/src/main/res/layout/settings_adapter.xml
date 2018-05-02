@@ -5,33 +5,52 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/fab_margin">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:text="Compressione"/>
-            <TextView android:id="@+id/compression_value"/>
-            <TextView android:text="Precarico"
-                android:layout_marginLeft="10dp"/>
-            <TextView android:id="@+id/preload_value"/>
+            <TextView android:text="@string/date"/>
+            <TextView android:id="@+id/date_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:text="Estensione"/>
-            <TextView android:id="@+id/rebound_value"/>
-            <TextView android:text="Pignone"
-                android:layout_marginLeft="10dp"/>
-            <TextView android:id="@+id/pignon_value"/>
+            <TextView android:text="@string/compression"/>
+            <TextView android:id="@+id/compression_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView android:text="Corona"/>
-            <TextView android:id="@+id/crown_value"/>
+            <TextView android:text="@string/preload"/>
+            <TextView android:id="@+id/preload_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView android:text="@string/rebound"/>
+            <TextView android:id="@+id/rebound_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/fab_margin">
+            <TextView android:text="@string/pinion"/>
+            <TextView android:id="@+id/pignon_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
+            <TextView android:text="@string/crown"
+                android:layout_marginStart="@dimen/fab_margin"/>
+            <TextView android:id="@+id/crown_value"
+                android:layout_marginStart="@dimen/fab_margin"/>
         </TableRow>
     </TableLayout>
 </android.support.constraint.ConstraintLayout>

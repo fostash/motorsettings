@@ -8,16 +8,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EditCircuitActivity extends AppCompatActivity {
+
+    //private ObjectInputStream ois;
+    //private ObjectOutputStream oos;
+    private List<SettingsData> settingsDataList;
+    private SettingsAdapter settingsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,33 +31,37 @@ public class EditCircuitActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        EditText compression = findViewById(R.id.compression);
-        EditText rebound = findViewById(R.id.rebound);
-        EditText preload = findViewById(R.id.preload);
-        EditText pignon = findViewById(R.id.pignon);
-        EditText crowm = findViewById(R.id.crown);
+        final EditText compression = findViewById(R.id.compression);
+        final EditText rebound = findViewById(R.id.rebound);
+        final EditText preload = findViewById(R.id.preload);
+        final EditText pignon = findViewById(R.id.pignon);
+        final EditText crowm = findViewById(R.id.crown);
+        this.settingsDataList = new ArrayList<>();
+
+        ListView previousSettings = findViewById(R.id.previous_settings);
+        settingsAdapter = new SettingsAdapter(this, R.layout.settings_adapter, settingsDataList);
+        previousSettings.setAdapter(settingsAdapter);
+        settingsAdapter.sort((el1, el2) -> el2.getDate().compareTo(el1.getDate()));
 
         try {
             String circuit_name = getIntent().getStringExtra("circuit_name");
-            if (new File(circuit_name).exists()) {
-                FileInputStream circuitNameIS = openFileInput(circuit_name);
-                ObjectInputStream ois = new ObjectInputStream(circuitNameIS);
+            System.out.println("circuit name " + circuit_name);
 
-                List<SettingsData> settingsDataList = (List<SettingsData>) ois.readObject();
+            FileInputStream circuitNameIS = openFileInput(circuit_name);
+            ObjectInputStream ois = new ObjectInputStream(circuitNameIS);
 
-                System.out.println("dddd"+ settingsDataList.size());
+            settingsDataList.addAll((List<SettingsData>) ois.readObject());
 
+            if (!settingsDataList.isEmpty()) {
                 SettingsData settingsData = settingsDataList.get(0);
 
-                compression.setText(settingsData.getCompression() + "");
-                rebound.setText(settingsData.getRebound() + "");
-                preload.setText(settingsData.getCompression() + "");
-                pignon.setText(settingsData.getPignon() + "");
-                crowm.setText(settingsData.getCrown() + "");
+                compression.setText(String.valueOf(settingsData.getCompression()));
+                rebound.setText(String.valueOf(settingsData.getRebound()));
+                preload.setText(String.valueOf(settingsData.getCompression()));
+                pignon.setText(String.valueOf(settingsData.getPignon()));
+                crowm.setText(String.valueOf(settingsData.getCrown()));
 
-                ListView previousSettings = findViewById(R.id.previous_settings);
-                SettingsAdapter settingsAdapter = new SettingsAdapter(this, R.layout.settings_adapter, settingsDataList);
-                previousSettings.setAdapter(settingsAdapter);
+
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -64,33 +73,31 @@ public class EditCircuitActivity extends AppCompatActivity {
             if (findViewById(R.id.settings_form).getVisibility() == View.VISIBLE) {
                 try {
                     String circuit_name = getIntent().getStringExtra("circuit_name");
-                    List<SettingsData> settingsDataList = new ArrayList<>();
-                    if (new File(circuit_name).exists()) {
-                        FileInputStream circuitNameIS = openFileInput(circuit_name);
-                        ObjectInputStream ois = new ObjectInputStream(circuitNameIS);
-
-                        settingsDataList = (List<SettingsData>) ois.readObject();
-                    }
-
-                    System.out.println("dddd"+ settingsDataList.size());
-
-                    FileOutputStream circuitName = openFileOutput(circuit_name, MODE_PRIVATE);
-                    ObjectOutputStream oos = new ObjectOutputStream(circuitName);
+                    System.out.println("save data for " + circuit_name);
 
                     settingsDataList.add(SettingsData.of(
                             Long.valueOf(compression.getText().toString()),
                             Long.valueOf(rebound.getText().toString()),
                             Long.valueOf(preload.getText().toString()),
                             Long.valueOf(pignon.getText().toString()),
-                            Long.valueOf(crowm.getText().toString())
+                            Long.valueOf(crowm.getText().toString()),
+                            new Date()
                     ));
+
+                    compression.setText("");
+                    rebound.setText("");
+                    preload.setText("");
+                    pignon.setText("");
+                    crowm.setText("");
+
+                    FileOutputStream circuitName = openFileOutput(circuit_name, MODE_PRIVATE);
+                    ObjectOutputStream oos = new ObjectOutputStream(circuitName);
                     oos.writeObject(settingsDataList);
                     oos.flush();
-                    oos.close();
-                    circuitName.close();
-                } catch (IOException | ClassNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
+                settingsAdapter.notifyDataSetChanged();
 
                 findViewById(R.id.settings_form).setVisibility(View.GONE);
                 findViewById(R.id.previous_settings).setVisibility(View.VISIBLE);
@@ -100,23 +107,35 @@ public class EditCircuitActivity extends AppCompatActivity {
             }
 
         });
-        /*fab.setOnClickListener(view -> {
-            FileOutputStream circuitName = null;
-            try {
-                circuitName = getApplicationContext().openFileOutput(getIntent().getStringExtra("circuit_name"), MODE_PRIVATE);
-                ObjectOutputStream ois = new ObjectOutputStream(circuitName);
+    }
 
-                ois.writeObject(SettingsData.of(
-                        Long.valueOf(compression.getText().toString()),
-                        Long.valueOf(rebound.getText().toString()),
-                        Long.valueOf(preload.getText().toString()),
-                        Long.valueOf(pignon.getText().toString()),
-                        Long.valueOf(crowm.getText().toString())
-                ));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        /*String circuit_name = getIntent().getStringExtra("circuit_name");
+        System.out.println("circuit name " + circuit_name);
+
+        try {
+            FileInputStream circuitNameIS = openFileInput(circuit_name);
+            ObjectInputStream ois = new ObjectInputStream(circuitNameIS);
+
+            settingsDataList.addAll((List<SettingsData>) ois.readObject());
+            settingsAdapter.notifyDataSetChanged();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }*/
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        /*try {
+            ois.close();
+            oos.flush();
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 }

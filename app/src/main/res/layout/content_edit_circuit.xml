@@ -36,7 +36,7 @@
                 android:id="@+id/compression"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/rebound_text"
@@ -49,7 +49,7 @@
                 android:id="@+id/rebound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/preload_text"
@@ -62,7 +62,7 @@
                 android:id="@+id/preload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords" />
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/pignon_text"
@@ -74,7 +74,8 @@
             <EditText
                 android:id="@+id/pignon"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/crown_text"
@@ -86,7 +87,8 @@
             <EditText
                 android:id="@+id/crown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number" />
 
         </LinearLayout>
 
