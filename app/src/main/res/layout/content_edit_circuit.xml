@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_edit_circuit">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="fostash.motorsettings.CircuitSettings">
+
+        <ListView
+            android:id="@+id/previous_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/settings_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/compression_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:labelFor="@id/compression"
+                android:text="@string/compression" />
+
+            <EditText
+                android:id="@+id/compression"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+
+            <TextView
+                android:id="@+id/rebound_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:labelFor="@id/rebound"
+                android:text="@string/rebound" />
+
+            <EditText
+                android:id="@+id/rebound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+
+            <TextView
+                android:id="@+id/preload_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:labelFor="@id/preload"
+                android:text="@string/preload" />
+
+            <EditText
+                android:id="@+id/preload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords" />
+
+            <TextView
+                android:id="@+id/pignon_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:labelFor="@id/pignon"
+                android:text="@string/pinion" />
+
+            <EditText
+                android:id="@+id/pignon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/crown_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:labelFor="@id/crown"
+                android:text="@string/crown" />
+
+            <EditText
+                android:id="@+id/crown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout>

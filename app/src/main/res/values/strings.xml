@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Motor Settings</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- circuit form -->
+    <string name="circuit_name">Circuit Name</string>
+    <string name="compression">Compressione</string>
+    <string name="rebound">Estensione</string>
+    <string name="preload">Precarico</string>
+    <string name="crown">Corona</string>
+    <string name="pinion">Pignone</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_edit_circuit">Circuit Settings</string>
+</resources>
