@@ -43,8 +43,8 @@ public class EditCircuitActivity extends AppCompatActivity {
             createListAdapter();
         } else {
             findViewById(R.id.settings_form).setVisibility(View.VISIBLE);
-            findViewById(R.id.previous_settings).setVisibility(View.GONE);
             findViewById(R.id.save_settings).setVisibility(View.VISIBLE);
+            findViewById(R.id.previous_settings).setVisibility(View.GONE);
             findViewById(R.id.new_settings).setVisibility(View.GONE);
         }
     }
@@ -106,8 +106,8 @@ public class EditCircuitActivity extends AppCompatActivity {
     private void splitView(View view) {
         setInputTextValue();
         findViewById(R.id.settings_form).setVisibility(View.VISIBLE);
-        findViewById(R.id.previous_settings).setVisibility(View.GONE);
         findViewById(R.id.save_settings).setVisibility(View.VISIBLE);
+        findViewById(R.id.previous_settings).setVisibility(View.GONE);
         findViewById(R.id.new_settings).setVisibility(View.GONE);
     }
 
@@ -141,8 +141,8 @@ public class EditCircuitActivity extends AppCompatActivity {
             settingsAdapter.notifyDataSetChanged();
 
             findViewById(R.id.settings_form).setVisibility(View.GONE);
-            findViewById(R.id.previous_settings).setVisibility(View.VISIBLE);
             findViewById(R.id.save_settings).setVisibility(View.GONE);
+            findViewById(R.id.previous_settings).setVisibility(View.VISIBLE);
             findViewById(R.id.new_settings).setVisibility(View.VISIBLE);
         } catch (IOException e) {
             Snackbar.make(view, "Error saving settings for circuit " + circuitNameParam, Snackbar.LENGTH_LONG).show();
